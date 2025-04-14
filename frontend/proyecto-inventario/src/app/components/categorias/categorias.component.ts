@@ -5,9 +5,10 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
 import { CategoriaFormComponent } from '../categoria-form/categoria-form.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-categorias',
-  imports: [MatIconModule,MatTableModule],
+  imports: [MatIconModule,MatTableModule,RouterModule],
   templateUrl: './categorias.component.html',
   styleUrls: ['./categorias.component.scss']
 })

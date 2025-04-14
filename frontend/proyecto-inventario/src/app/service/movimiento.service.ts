@@ -9,12 +9,10 @@ export class MovimientoService {
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todos los movimientos
   getMovimientos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  // Crear un movimiento (ej: entrada/salida de productos)
   crearMovimiento(movimiento: {
     producto: string,
     tipo: 'ENTRADA' | 'SALIDA',
@@ -24,7 +22,6 @@ export class MovimientoService {
     return this.http.post(this.apiUrl, movimiento);
   }
 
-  // Obtener movimientos de un producto específico (opcional)
   getMovimientosPorProducto(productoId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}?producto=${productoId}`);
   }

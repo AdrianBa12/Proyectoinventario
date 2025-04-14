@@ -5,11 +5,11 @@ import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth'; // Ajusta según tu backend
+  private apiUrl = 'http://localhost:3000/api/auth'; 
   private currentUserSubject = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient, private router: Router) {
-    this.loadUserFromStorage(); // Cargar usuario al iniciar
+    this.loadUserFromStorage(); 
   }
 
   login(username: string, password: string) {

@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const token = localStorage.getItem('token');
-    const requiredRole = route.data['rol']; // Ej: data: { rol: 'ADMIN' }
+    const requiredRole = route.data['rol']; 
 
     if (token) {
       if (requiredRole && !this.authService.isAdmin()) {

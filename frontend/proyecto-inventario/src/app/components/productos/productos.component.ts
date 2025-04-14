@@ -1,21 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../service/categoria.service';
 import { ProductService } from '../../service/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductoFormComponent } from '../producto-form/producto-form.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
-
+import {MatIconModule} from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-productos',
-  imports: [],
+  imports: [MatIconModule,MatTableModule,CommonModule,RouterModule],
   templateUrl: './productos.component.html',
-  styleUrl: './productos.component.css'
+  styleUrl: './productos.component.scss'
 })
-export class ProductosComponent {
-
+export class ProductosComponent implements OnInit {
   productos: any[] = [];
   categorias: any[] = [];
-  displayedColumns: string[] = ['nombre', 'precio', 'stock', 'categoria', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'descripcion','precio', 'stock', 'categoria', 'acciones'];
 
   constructor(
     private productoService: ProductService,
@@ -72,5 +74,4 @@ export class ProductosComponent {
       }
     });
   }
-
 }

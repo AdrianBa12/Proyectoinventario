@@ -4,14 +4,16 @@ import { AuthService } from '../../service/auth.service';
 import { ProductService } from '../../service/product.service';
 import { CategoriaService } from '../../service/categoria.service';
 import { MovimientoService } from '../../service/movimiento.service';
-
+import { RouterModule } from '@angular/router';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  
   user: any;
   stats: any = {
     totalProductos: 0,
@@ -20,6 +22,8 @@ export class DashboardComponent implements OnInit {
   };
   productosRecientes: any[] = [];
   categorias: any[] = [];
+
+  categoriaMap: { [key: string]: string } = {}; 
 
   constructor(
     private authService: AuthService,
@@ -31,8 +35,23 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.loadUser();
     this.loadStats();
-    this.loadProductosRecientes();
-    this.loadCategorias();
+    forkJoin([
+      this.productoService.getProductos(),
+      this.categoriaService.getCategorias()
+    ]).subscribe(([productos, categorias]) => {
+      this.productosRecientes = productos
+        .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 10);
+      this.categorias = categorias;
+      categorias.forEach(categoria => {
+        this.categoriaMap[categoria._id] = categoria.nombre;
+      });
+      console.log("categoriaMap llenado:", this.categoriaMap);
+    });
+  }
+  
+  getCategoriaName(categoriaId: string): string {
+    return this.categoriaMap[categoriaId] || 'Desconocido';
   }
 
   loadUser() {
@@ -57,26 +76,31 @@ export class DashboardComponent implements OnInit {
       ).length;
     });
   }
-  getCategoriaName(categoriaId: number): string {
-    const categoria = this.categorias.find(cat => cat.id === categoriaId);
-    return categoria ? categoria.nombre : 'Desconocido';
-  }
-
+  
   loadProductosRecientes() {
     this.productoService.getProductos().subscribe(productos => {
       this.productosRecientes = productos
         .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        .slice(0, 5); // Últimos 5 productos
+        .slice(0, 10);
+        console.log("Productos Recientes:", this.productosRecientes); 
     });
   }
 
   loadCategorias() {
     this.categoriaService.getCategorias().subscribe(categorias => {
       this.categorias = categorias;
+      categorias.forEach(categoria => {
+        this.categoriaMap[categoria._id] = categoria.nombre;
+      });
+      console.log("categoriaMap llenado:", this.categoriaMap);
     });
   }
+
+  
 
   logout() {
     this.authService.logout();
   }
+  
+    
 }

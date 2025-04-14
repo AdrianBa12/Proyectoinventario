@@ -1,18 +1,24 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
-
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './login.component.html'
+  imports: [MatFormFieldModule,MatCardModule,MatIconModule,CommonModule,MatProgressSpinnerModule,ReactiveFormsModule],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  error: string = '';
+  errorMessage: string = '';
+  isLoading: boolean = false;
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -20,19 +26,30 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      this.authService.login(
-        this.loginForm.value.username,
-        this.loginForm.value.password
-      ).subscribe({
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+    const passwordField = document.querySelector('[formControlName="password"]') as HTMLInputElement;
+    passwordField.type = this.showPassword ? 'text' : 'password';
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.valid && !this.isLoading) {
+      this.isLoading = true;
+      this.errorMessage = '';
+
+      const { username, password } = this.loginForm.value;
+      this.authService.login(username, password).subscribe({
+        next: () => {
+          this.router.navigate(['/dashboard']);
+        },
         error: (err) => {
-          this.error = err.error?.message || 'Usuario o contraseña incorrectos';
+          this.errorMessage = err.error?.message || 'Credenciales incorrectas. Inténtalo nuevamente.';
+          this.isLoading = false;
         }
       });
     }

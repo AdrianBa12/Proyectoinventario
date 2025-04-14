@@ -1,70 +1,160 @@
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #f5f5f5;
+$primary-color: #3f51b5;
+$primary-dark: #303f9f;
+$accent-color: #ff4081;
+$error-color: #f44336;
+$white: #ffffff;
+$light-gray: #f5f5f5;
+$text-gray: #757575;
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  background: rgba($white, 0.96);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
   }
-  
-  .login-form {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  .logo {
+    height: 60px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    color: $primary-color;
+    font-size: 24px;
+    margin: 0;
+    font-weight: 500;
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .form-field {
     width: 100%;
-    max-width: 400px;
-  
-    h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      color: #333;
+    position: relative;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: $text-gray;
+      font-weight: 500;
     }
-  
-    .form-group {
-      margin-bottom: 1rem;
-  
-      label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-      }
-  
-      input {
-        width: 100%;
-        padding: 0.5rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-      }
-  
-      small {
-        color: #e74c3c;
-        font-size: 0.8rem;
-      }
-    }
-  
-    .error-message {
-      color: #e74c3c;
-      text-align: center;
-      margin: 1rem 0;
-    }
-  
-    .submit-button {
+
+    input {
       width: 100%;
-      padding: 0.75rem;
-      background: #3498db;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.3s;
-  
-      &:hover {
-        background: #2980b9;
+      padding: 12px 16px 12px 40px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border 0.3s;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
       }
-  
-      &:disabled {
-        background: #95a5a6;
-        cursor: not-allowed;
-      }
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $text-gray;
     }
   }
+}
+
+.submit-button {
+  background: $primary-color;
+  color: $white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:hover {
+    background: $primary-dark;
+  }
+
+  &:disabled {
+    background: #bdbdbd;
+    cursor: not-allowed;
+  }
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $error-color;
+  background: rgba($error-color, 0.08);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 14px;
+
+  &::before {
+    content: "⚠";
+    font-size: 18px;
+  }
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+  color: $text-gray;
+  font-size: 14px;
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba($white, 0.3);
+  border-radius: 50%;
+  border-top-color: $white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -14,7 +14,7 @@ export class CategoriaService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  // Crear una categoría (opcional, si necesitas agregar desde el frontend)
+  
   crearCategoria(categoria: { nombre: string, descripcion: string }): Observable<any> {
     return this.http.post(this.apiUrl, categoria);
   }
@@ -24,7 +24,7 @@ export class CategoriaService {
     return this.http.put(`${this.apiUrl}/${id}`, categoria);
   }
 
-  // Eliminar una categoría (opcional)
+  
   eliminarCategoria(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

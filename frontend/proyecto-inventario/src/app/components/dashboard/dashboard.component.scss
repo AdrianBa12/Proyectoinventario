@@ -105,3 +105,57 @@
       }
     }
   }
+
+  .clickable {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    
+    .card-hover {
+      bottom: 0;
+    }
+  }
+
+  .card-hover {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    background: rgba(63, 81, 181, 0.9);
+    color: white;
+    text-align: center;
+    padding: 8px;
+    transition: all 0.3s ease;
+  }
+}
+
+.clickable-section {
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0,0,0,0.02);
+    
+    .see-all {
+      color: #3f51b5;
+      transform: translateX(5px);
+    }
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .see-all {
+      transition: all 0.2s ease;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  }
+}

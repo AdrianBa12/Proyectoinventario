@@ -60,7 +60,6 @@ export class ProductoFormComponent implements OnInit {
     });
   }
 
-  // Helper para mostrar errores en los campos
   getFieldError(field: string): string {
     const control = this.form.get(field);
     if (control?.hasError('required')) return 'Campo obligatorio';

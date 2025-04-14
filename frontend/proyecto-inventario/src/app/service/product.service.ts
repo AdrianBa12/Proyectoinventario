@@ -9,7 +9,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todos los productos
+  
   getProductos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
@@ -26,7 +26,7 @@ export class ProductService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  // Buscar productos por categoría (opcional)
+  
   getProductosPorCategoria(categoriaId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}?categoria=${categoriaId}`);
   }

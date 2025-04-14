@@ -1,59 +1,55 @@
 <div class="dashboard-container" *ngIf="user">
-    <!-- Header -->
-    <div class="header">
-      <h1>Bienvenido, {{ user.username }} <span>({{ user.rol }})</span></h1>
-      <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
-    </div>
-  
-    <!-- Cards de Estadísticas -->
-    <div class="stats-cards">
-      <div class="card">
-        <h3>Productos</h3>
-        <p class="count">{{ stats.totalProductos }}</p>
-        <span>Total registrados</span>
-      </div>
-      <div class="card">
-        <h3>Categorías</h3>
-        <p class="count">{{ stats.totalCategorias }}</p>
-        <span>Disponibles</span>
-      </div>
-      <div class="card">
-        <h3>Movimientos</h3>
-        <p class="count">{{ stats.movimientosHoy }}</p>
-        <span>Hoy</span>
-      </div>
-    </div>
-  
-    <!-- Últimos Productos -->
-    <div class="recent-products">
-      <h2>Últimos Productos Registrados</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Categoría</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let producto of productosRecientes">
-            <td>{{ producto.nombre }}</td>
-            <td>S/ {{ producto.precio }}</td>
-            <td>{{ producto.stock }}</td>
-            <td>{{ getCategoriaName(producto.categoria) }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <!-- Lista de Categorías (Opcional) -->
-    <div class="categories-list">
-      <h2>Categorías Existentes</h2>
-      <div class="category-tags">
-        <span *ngFor="let categoria of categorias" class="tag">
-          {{ categoria.nombre }}
-        </span>
-      </div>
+  <div class="header">
+    <h1>Bienvenido, {{ user.username }} <span>({{ user.rol }})</span></h1>
+    <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
+  </div>
+
+  <div class="stats-cards">
+    <a [routerLink]="['/productos']" class="card">
+      <h3>Productos</h3>
+      <p class="count">{{ stats.totalProductos }}</p>
+      <span>Total registrados</span>
+    </a>
+    <a [routerLink]="['/categorias']" class="card">
+      <h3>Categorías</h3>
+      <p class="count">{{ stats.totalCategorias }}</p>
+      <span>Disponibles</span>
+    </a>
+    <div [routerLink]="['/movimientos']"class="card">
+      <h3>Movimientos</h3>
+      <p class="count">{{ stats.movimientosHoy }}</p>
+      <span>Hoy</span>
     </div>
   </div>
+
+  <div class="recent-products">
+    <h2>Últimos Productos Registrados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Categoría</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productosRecientes">
+          <td>{{ producto.nombre }}</td>
+          <td>S/ {{ producto.precio }}</td>
+          <td>{{ producto.stock }}</td>
+          <td>{{ getCategoriaName(producto.categoria) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="categories-list">
+    <h2>Categorías Existentes</h2>
+    <div class="category-tags">
+      <span *ngFor="let categoria of categorias" class="tag">
+        {{ categoria.nombre }}
+      </span>
+    </div>
+  </div>
+</div>
