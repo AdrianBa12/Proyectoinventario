@@ -18,7 +18,6 @@ Este proyecto es una aplicación web de gestión de inventario desarrollada con 
     * Angular Material
     * TypeScript
 * **Backend**:
-    * NestJS
     * Node.js
     * MongoDB (o tu base de datos preferida)
 * **Otros**:
@@ -86,7 +85,7 @@ Este proyecto es una aplicación web de gestión de inventario desarrollada con 
 
 ¡Las contribuciones son bienvenidas! Si encuentras algún error o tienes alguna sugerencia de mejora, por favor, abre un issue o envía un pull request.
 
-## Nota Importante
+## Nota Importante()
 username: 'admin',
 password: 'admin123'
 
