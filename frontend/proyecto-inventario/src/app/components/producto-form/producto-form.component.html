@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>{{ data.producto ? 'Editar' : 'Nuevo' }} Producto</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" class="product-form">
+    <!-- Nombre -->
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" required>
+      <mat-error *ngIf="form.get('nombre')?.invalid">
+        {{ getFieldError('nombre') }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" rows="3"></textarea>
+      <mat-error *ngIf="form.get('descripcion')?.invalid">
+        {{ getFieldError('descripcion') }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Precio -->
+    <mat-form-field appearance="fill">
+      <mat-label>Precio (S/)</mat-label>
+      <input matInput type="number" formControlName="precio" min="0.01" step="0.01" required>
+      <mat-error *ngIf="form.get('precio')?.invalid">
+        {{ getFieldError('precio') }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Stock -->
+    <mat-form-field appearance="fill">
+      <mat-label>Stock</mat-label>
+      <input matInput type="number" formControlName="stock" min="0" required>
+      <mat-error *ngIf="form.get('stock')?.invalid">
+        {{ getFieldError('stock') }}
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Categoría -->
+    <mat-form-field appearance="fill">
+      <mat-label>Categoría</mat-label>
+      <mat-select formControlName="categoria" required>
+        <mat-option *ngFor="let categoria of categorias" [value]="categoria._id">
+          {{ categoria.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('categoria')?.invalid">
+        {{ getFieldError('categoria') }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">
+    {{ data.producto ? 'Actualizar' : 'Guardar' }}
+  </button>
+</mat-dialog-actions>

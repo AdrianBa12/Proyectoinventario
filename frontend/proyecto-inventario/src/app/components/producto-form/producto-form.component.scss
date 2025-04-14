@@ -1,0 +1,10 @@
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px;
+  
+    mat-form-field {
+      width: 100%;
+    }
+  }

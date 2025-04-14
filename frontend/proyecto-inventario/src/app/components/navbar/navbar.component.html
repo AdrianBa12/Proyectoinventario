@@ -1,0 +1,13 @@
+<nav class="bg-blue-500 p-4">
+    <ul class="flex space-x-4 text-white">
+      <li><a routerLink="/" class="hover:text-gray-200">Home</a></li>
+      <li><a routerLink="/dashboard" *ngIf="isLoggedIn" class="hover:text-gray-200">Dashboard</a></li>
+      <li><a routerLink="/productos" *ngIf="isLoggedIn && (rol === 'ADMIN' || rol === 'EMPLEADO')" class="hover:text-gray-200">Productos</a></li>
+      <li><a routerLink="/categorias" *ngIf="isLoggedIn && rol === 'ADMIN'" class="hover:text-gray-200">Categorías</a></li>
+      <li><a routerLink="/movimientos" *ngIf="isLoggedIn && rol === 'ADMIN'" class="hover:text-gray-200">Movimientos</a></li>
+      <li><a routerLink="/login" *ngIf="!isLoggedIn" class="hover:text-gray-200">Login</a></li>
+      <li *ngIf="isLoggedIn">
+        <button (click)="logout()" class="bg-red-500 text-white p-2 rounded hover:bg-red-700">Logout</button>
+      </li>
+    </ul>
+  </nav>
