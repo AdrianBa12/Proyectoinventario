@@ -5,24 +5,27 @@
   
   <mat-card class="login-card mat-elevation-z10">
     <div class="logo-container">
-      <img src="logo.png" alt="Logo" class="logo">  
-      <h1 class="app-name">Gestion de Inventario</h1>
+      
+      <h1 class="app-name" >Gestion de Inventario</h1>
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-      <!-- Usuario -->
+
+      
       <mat-form-field appearance="fill" floatLabel="always" class="form-field">
+        <h2>Usuario</h2>
         <mat-label>Usuario</mat-label>
         <input matInput formControlName="username" required>
         <mat-icon matPrefix class="input-icon">person_outline</mat-icon>
         <mat-hint>Ej: admin</mat-hint>
       </mat-form-field>
-
+      
       <mat-form-field appearance="fill" floatLabel="always" class="form-field">
+        <h2>Contraseña</h2>
         <mat-label>Contraseña</mat-label>
-        <input matInput type="password" formControlName="password" required>
+        <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" required>
         <mat-icon matPrefix class="input-icon">lock_outline</mat-icon>
-        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" aria-label="Toggle password visibility">
           <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
       </mat-form-field>
