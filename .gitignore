@@ -1,4 +1,23 @@
-# .gitignore
-node_modules/
-dist/
-.env
+# Node.js (backend)
+backend/node_modules/
+backend/.env
+backend/package-lock.json
+
+# Angular (frontend)
+frontend/proyecto-inventario/node_modules/
+frontend/proyecto-inventario/.angular/
+frontend/proyecto-inventario/.env
+frontend/proyecto-inventario/dist/
+frontend/proyecto-inventario/package-lock.json
+
+# Logs y otras cosas generales
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs / SO
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
