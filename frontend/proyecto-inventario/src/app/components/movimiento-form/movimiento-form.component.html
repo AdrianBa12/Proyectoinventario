@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{ data.movimiento ? 'Editar' : 'Nuevo' }} Movimiento</h2>
+<mat-dialog-content>
+  <form [formGroup]="movimientoForm" class="movimiento-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Producto</mat-label>
+      <mat-select formControlName="producto" required>
+        <mat-option *ngFor="let producto of data.productos" [value]="producto._id">
+          {{ producto.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="tipo" required>
+        <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+          {{ tipo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cantidad</mat-label>
+      <input matInput type="number" formControlName="cantidad" required>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="movimientoForm.invalid">
+    Guardar
+  </button>
+</mat-dialog-actions>

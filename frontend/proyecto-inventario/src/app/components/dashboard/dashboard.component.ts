@@ -95,6 +95,14 @@ export class DashboardComponent implements OnInit {
       console.log("categoriaMap llenado:", this.categoriaMap);
     });
   }
+  loadMovimientos() {
+    this.movimientoService.getMovimientos().subscribe(movimientos => {
+      const hoy = new Date().toISOString().split('T')[0];
+      this.stats.movimientosHoy = movimientos.filter((m: any) => 
+        m.fecha.split('T')[0] === hoy
+      ).length;
+    });
+  }
 
   
 

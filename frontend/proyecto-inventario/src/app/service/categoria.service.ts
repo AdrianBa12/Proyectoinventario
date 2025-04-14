@@ -9,22 +9,18 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todas las categorías
   getCategorias(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  
   crearCategoria(categoria: { nombre: string, descripcion: string }): Observable<any> {
     return this.http.post(this.apiUrl, categoria);
   }
-
 
   actualizarCategoria(id: string, categoria: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, categoria);
   }
 
-  
   eliminarCategoria(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

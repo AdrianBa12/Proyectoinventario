@@ -7,10 +7,9 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { MovimientosComponent } from './components/movimientos/movimientos.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redirige a login inicialmente
-  { path: 'login', component: LoginComponent }, // Ruta pública
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, 
+  { path: 'login', component: LoginComponent }, 
   
-  // Rutas protegidas (requieren autenticación)
   { 
     path: 'dashboard', 
     component: DashboardComponent, 
@@ -32,6 +31,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard] 
   },
 
-  // Ruta comodín (opcional: redirige a login si la ruta no existe)
+  
   { path: '**', redirectTo: 'login' }
 ];

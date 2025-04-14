@@ -7,7 +7,6 @@ const usuarioSchema = new mongoose.Schema({
   rol: { type: String, enum: ['ADMIN', 'EMPLEADO'], required: true }
 });
 
-// Hash de la contraseña antes de guardar
 usuarioSchema.pre('save', async function(next) {
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 10);

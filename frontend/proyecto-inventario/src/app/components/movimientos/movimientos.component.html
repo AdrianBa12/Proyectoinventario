@@ -1,1 +1,82 @@
-<p>movimientos works!</p>
+<div class="movimientos-container">
+    <div class="header">
+      <h1>Registro de Movimientos</h1>
+      <button mat-raised-button color="primary" (click)="openFormDialog()">
+        <mat-icon>add</mat-icon> Nuevo Movimiento
+      </button>
+
+      <button mat-raised-button color="accent" [routerLink]="['/dashboard']">
+        <mat-icon>dashboard</mat-icon> Volver a Dashboard
+      </button>
+    </div>
+  
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Filtrar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Entrada">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  
+    <div class="table-container mat-elevation-z8">
+
+      
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let row">{{ formatDate(row.fecha) }}</td>
+        </ng-container>
+  
+        
+        <ng-container matColumnDef="producto">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Producto</th>
+          <td mat-cell *matCellDef="let row">{{ getProductoNombre(row.producto) }}</td>
+        </ng-container>
+  
+        
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+          <td mat-cell *matCellDef="let row">
+            <span [class.entrada]="row.tipo === 'ENTRADA'" [class.salida]="row.tipo === 'SALIDA'">
+              {{ row.tipo?.toUpperCase() }}
+            </span>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="cantidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+          <td mat-cell *matCellDef="let row">{{ row.cantidad }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="usuario">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+          <td mat-cell *matCellDef="let row">{{ row.usuario?.username || 'Sistema' }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)="openFormDialog(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteMovimiento(row._id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        <tr *ngIf="dataSource.data.length === 0">
+            <td colspan="6" class="no-data-message">
+              No se encontraron movimientos. 
+              <button mat-button color="primary" (click)="openFormDialog()">
+                Crear primer movimiento
+              </button>
+            </td>
+      </tr>
+      </table>
+  
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+    </div>
+  </div>

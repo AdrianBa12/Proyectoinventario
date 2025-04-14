@@ -1,0 +1,42 @@
+.movimientos-container {
+    padding: 20px;
+  
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  
+    .search-field {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+  
+    .table-container {
+      overflow-x: auto;
+  
+      .entrada {
+        color: #2e7d32; 
+        font-weight: 500;
+      }
+  
+      .salida {
+        color: #c62828; 
+        font-weight: 500;
+      }
+  
+      .mat-column-acciones {
+        width: 80px;
+        text-align: center;
+      }
+    }
+  }
+
+  .no-data-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+  }

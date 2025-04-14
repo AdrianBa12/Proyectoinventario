@@ -21,14 +21,13 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
 
-    // 3. Generar token JWT (válido por 1 hora)
+  
     const token = jwt.sign(
       { userId: usuario._id, rol: usuario.rol },
-      process.env.JWT_SECRET || 'secreto_para_desarrollo', // Usa una variable de entorno en producción
+      process.env.JWT_SECRET || 'secreto_para_desarrollo', 
       { expiresIn: '1h' }
     );
 
-    // 4. Responder con token y datos del usuario (sin password)
     res.json({
       token,
       user: {

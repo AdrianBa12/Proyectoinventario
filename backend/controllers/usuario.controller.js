@@ -48,10 +48,10 @@ exports.crearUsuario = async (req, res) => {
 // Controlador para obtener todos los usuarios (solo ADMIN)
 exports.obtenerUsuarios = async (req, res) => {
   try {
-    // Ejemplo de verificación de rol (descomenta si lo necesitas)
-    // if (req.user.rol !== 'ADMIN') {
-    //   return res.status(403).json({ message: 'No autorizado' });
-    // }
+    
+    if (req.user.rol !== 'ADMIN') {
+      return res.status(403).json({ message: 'No autorizado' });
+    }
 
     const usuarios = await Usuario.find().select('-password -__v'); // Excluye campos sensibles
     res.json(usuarios);
@@ -62,7 +62,6 @@ exports.obtenerUsuarios = async (req, res) => {
   }
 };
 
-// Controlador para eliminar usuario (opcional)
 exports.eliminarUsuario = async (req, res) => {
   try {
     const { id } = req.params;
